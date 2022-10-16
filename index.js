@@ -1,4 +1,4 @@
-// Var Delegations 
+// Initialize Variables
 var button = document.querySelector(".hamburger-btn")
 var dropDown = document.querySelector(".hamburger-menu")
 var menu = document.querySelector(".menu")
