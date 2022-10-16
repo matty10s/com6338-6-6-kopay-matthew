@@ -1,36 +1,37 @@
-var burgerButton = document.querySelector('.hamburger-btn')
-var burgerMenu = document.getElementById('main-menu')
+// Var Delegations 
+var button = document.querySelector(".hamburger-btn")
+var dropDown = document.querySelector(".hamburger-menu")
+var menu = document.querySelector(".menu")
 
-function menuToggle() {
-    burgerMenu.classList.toggle('show-menu')
-    if (burgerMenu.classList.contains('show-menu')){
-        this.ariaExpanded = true
-    }else{
-        this.ariaExpanded = false
+// Open and Close Hamburger Menu Function
+function openClose(e) {
+    dropDown.classList.toggle("show-menu")
+    button.focus()
+    console.log('clicked button')
+    if (dropDown.classList.contains("show-menu")){
+        button.setAttribute ("aria-expanded", true)
+    } else {
+        button.setAttribute ("aria-expanded", false)
+    }
+  }
+  
+button.onclick = openClose
+
+// Close functions for the menu 
+function backOut (e) {
+    dropDown.classList.remove("show-menu");
+    button.setAttribute ("aria-expanded", false)
+    button.focus()
+}
+
+document.onkeyup = function (e) {
+    if (e.key === 'Escape') {
+        backOut()
     }
 }
 
-burgerButton.addEventListener('click', menuToggle)
-
-document.onkeydown = function(e){
-    if (e.key === 'Escape' && burgerMenu.classList.contains('show-menu')) {
-        if (burgerMenu.contains(document.activeElement)) {
-            burgerButton.focus()
-            menuToggle()
-        }else{
-            menuToggle()
-            burgerButton.blur()
-        }
-    }
-    if (e.key === 'Tab') {
-        if (!burgerMenu.contains(document.activeElement) && burgerMenu.classList.contains('show-menu')) {
-            burgerButton.focus()
-        }
-    }
-}
-
-document.onclick = function(e) {
-    if (!document.querySelector('nav').contains(e.target) && burgerMenu.classList.contains('show-menu')) {
-        menuToggle()
+document.body.onclick = function (e) {
+    if (!menu.contains(e.target)){
+        backOut()
     }
 }
